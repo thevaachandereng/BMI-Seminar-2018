@@ -70,29 +70,14 @@
 %\end{frame}
 
 
-\begin{frame}{Existing Time Series Clustering Methods}
-Partition-based
-\begin{itemize}
-\item Short Time-series Expression Miner (STEM)
-\item Graphical Query Language (GQL)
-\item Cluster Analysis of Gene Expression Dynamics (CAGED)
-\end{itemize}
 
-Hierarchical-based
-\begin{itemize}
-\item Dynamic Time Warping (DTW)
-\item Short Time Series Distance (STS)
-\end{itemize}
+\begin{frame}{Toy Example: Intuitive Clustering}
+    \begin{figure}
+     \includegraphics[width=0.5\linewidth]{Toy.png}
+      \caption{Hypothetical example with 4 genes}
+       \label{fig:sub11}
+    \end{figure}
 \end{frame}
-
-
-%\begin{frame}{Toy Example: Intuitive Clustering}
-%    \begin{figure}
-%     \includegraphics[width=0.5\linewidth]{Toy.png}
-%      \caption{Hypothetical example with 4 genes}
-%       \label{fig:sub11}
-%    \end{figure}
-%\end{frame}
 
 
 
@@ -144,7 +129,7 @@ Delayed response (lags)
 \begin{frame}{What is a Lag?}
 \begin{figure}
      \includegraphics[width=0.60\linewidth]{Lags.png}
-      \caption{This plot shows two genes that are lagged. The upper plot shows the actual intensity of the genes. The middle plot shows a -1 lag for gene 1 and the lower plot shows a lag of 1 for gene 2.}
+      \caption{An example of the effects of applying different lags to genes 1 and 2.  Gene 1 and 2 are not lagged in top row. Gene 1 with lag 1 i }
        \label{fig:lags}
     \end{figure}
 
@@ -185,14 +170,20 @@ exp(\frac{- E(w)}{C}) * corr_w(L^{\hat{X}_i}Y_i, L^{\hat{X}_j}Y_j, exp(\frac{- w
 \end{multline*}
 \end{frame}
 
-\begin{frame}{Simulated Data}
-\begin{figure}
-     \includegraphics[width=0.65\linewidth]{Simulation_plot.png}
-      \caption{Four models simulated using ImpulseDE. Random noise was added to the model parameters to induce variation around a common trend.}
-       \label{fig:simdata}
-    \end{figure}
-\end{frame}
+\begin{frame}{Existing Time Series Clustering Methods}
+Partition-based
+\begin{itemize}
+\item Short Time-series Expression Miner (STEM)
+\item Graphical Query Language (GQL)
+\item Cluster Analysis of Gene Expression Dynamics (CAGED)
+\end{itemize}
 
+Hierarchical-based
+\begin{itemize}
+\item Dynamic Time Warping (DTW)
+\item Short Time Series Distance (STS)
+\end{itemize}
+\end{frame}
 
 
 \begin{frame}{Clustering Accuracy}
@@ -200,6 +191,15 @@ exp(\frac{- E(w)}{C}) * corr_w(L^{\hat{X}_i}Y_i, L^{\hat{X}_j}Y_j, exp(\frac{- w
 \item  Adjusted Rand Index (ARI): similarity between two data clusterings and adjusted for chance 
 \item  ARI score close to 1 indicates similar clusterings, score close to 0 otherwise
 \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Simulated Data}
+\begin{figure}
+     \includegraphics[width=0.65\linewidth]{Simulation_plot.png}
+      \caption{Four models simulated using ImpulseDE. Random noise was added to the model parameters to induce variation around a common trend.}
+       \label{fig:simdata}
+    \end{figure}
 \end{frame}
 
 
@@ -218,9 +218,8 @@ exp(\frac{- E(w)}{C}) * corr_w(L^{\hat{X}_i}Y_i, L^{\hat{X}_j}Y_j, exp(\frac{- w
 \begin{itemize}
 \item Algorithm tackles the issue of irregular time samples and delayed responses
 \item Preference for distance-based or correlation-based clustering is subjective
-\item R package available on CRAN (LPWC) and preprint on Bioarxiv
-\item Allow missing data (imputation)
-\item Support clustering a mixed dataset with different time points
+\item R package available on CRAN (LPWC) and preprint on bioRxiv
+\item Allow missing data (imputation) and support mixed dataset with different time points
 \item Improve the optimal lag assignments
 \end{itemize}
 \end{frame}
