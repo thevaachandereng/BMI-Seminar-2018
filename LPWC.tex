@@ -152,6 +152,7 @@ General Formula
 corr_{LPWC}(i, j, X_i, X_j) = \underbrace{exp(\frac{- E(w)}{C})}_{\text{penalty}}  * 
 \underbrace{corr_w(L^{X_i}Y_i, L^{X_j}Y_j, exp(\frac{- w}{C}))}_{\text{weigthed correlation}}
 \end{multline*}
+$$w = (L^{X_i}T_i - L^{X_j}T_j)^2$$
 \end{frame}
 
 \begin{frame}{Algorithm}
