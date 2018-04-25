@@ -38,7 +38,7 @@
 \end{frame}
 
 
-% 3rd slide
+%% 3rd slide
 %\begin{frame}{Biological Time Series}
 %    
 %\begin{itemize}
@@ -50,7 +50,10 @@
 % \end{itemize}
 %
 %\end{frame}
-
+%
+%
+%
+%
 %\begin{frame}{Types of Clustering Algorithms}
 %    \begin{figure}
 %    \centering
@@ -131,7 +134,7 @@ Delayed response (lags)
 \begin{frame}{What is a Lag?}
 \begin{figure}
      \includegraphics[width=0.60\linewidth]{Lags.png}
-      \caption{An example of the effects of applying different lags to genes 1 and 2.  Gene 1 and 2 are not lagged in top row. Gene 1 with lag 1 i }
+      \caption{An example of the effects of applying different lags to genes 1 and 2.  Gene 1 and 2 are not lagged in top row. Gene 1 with lag -1, gene 2 with no lags in middle row. Gene 1 with -1 and gene 2 with lag 1 in the bottom row.}
        \label{fig:lags}
     \end{figure}
 
@@ -147,34 +150,33 @@ LPWC is composed of two steps:
 
 General Formula
 
-
 \begin{multline*}
 corr_{LPWC}(i, j, X_i, X_j) = \underbrace{exp(\frac{- E(w)}{C})}_{\text{penalty}}  * 
-\underbrace{corr_w(L^{X_i}Y_i, L^{X_j}Y_j, exp(\frac{- w}{C}))}_{\text{weigthed correlation}}
+\underbrace{corr_w(L^{X_i}Y_i, L^{X_j}Y_j, exp(\frac{- w}{C}))}_{\text{weighted correlation}}
 \end{multline*}
 $$w = (L^{X_i}T_i - L^{X_j}T_j)^2$$
 \end{frame}
 
-\begin{frame}{Algorithm}
-\textbf{Computing optimal lag}
-
-$$score_{j} = \underset{X_i \in \{-m,..., m\}}{\mathrm{max}} \;\, corr_{LPWC}(i, j, X_i, 0) \quad \forall j \neq i$$
-
-$$lag_{j} = \underset{X_i \in \{-m,..., m\}}{\mathrm{arg \,max}} \;\, corr_{LPWC}(i, j, X_i, 0) \quad \forall j \neq i$$
-Then, a best lag $\hat{X}_i$ for gene $i$ assigned by 
-\[
-\hat{X}_i = \underset{k \in \{-m, ..., m\}}{\mathrm{arg \,max}} \sum_{j \neq i} I(lag_j = k) * score_j
-\]
-
-This is repeated to select a best lag for all genes.
-
-\textbf{Computing final correlation matrix}
-\begin{multline*}
- corr_{LPWC}(i, j, \hat{X}_i, \hat{X}_j) = 
-exp(\frac{- E(w)}{C}) * corr_w(L^{\hat{X}_i}Y_i, L^{\hat{X}_j}Y_j, exp(\frac{- w}{C}))
-\end{multline*}
-\end{frame}
-
+%\begin{frame}{Algorithm}
+%\textbf{Computing optimal lag}
+%
+%$$score_{j} = \underset{X_i \in \{-m,..., m\}}{\mathrm{max}} \;\, corr_{LPWC}(i, j, X_i, 0) \quad \forall j \neq i$$
+%
+%$$lag_{j} = \underset{X_i \in \{-m,..., m\}}{\mathrm{arg \,max}} \;\, corr_{LPWC}(i, j, X_i, 0) \quad \forall j \neq i$$
+%Then, a best lag $\hat{X}_i$ for gene $i$ assigned by 
+%\[
+%\hat{X}_i = \underset{k \in \{-m, ..., m\}}{\mathrm{arg \,max}} \sum_{j \neq i} I(lag_j = k) * score_j
+%\]
+%
+%This is repeated to select a best lag for all genes.
+%
+%\textbf{Computing final correlation matrix}
+%\begin{multline*}
+% corr_{LPWC}(i, j, \hat{X}_i, \hat{X}_j) = 
+%exp(\frac{- E(w)}{C}) * corr_w(L^{\hat{X}_i}Y_i, L^{\hat{X}_j}Y_j, exp(\frac{- w}{C}))
+%\end{multline*}
+%\end{frame}
+%
 %\begin{frame}{Existing Time Series Clustering Methods}
 %Partition-based
 %\begin{itemize}
