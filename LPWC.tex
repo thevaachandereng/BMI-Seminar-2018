@@ -38,41 +38,41 @@
 \end{frame}
 
 
-%% 3rd slide
-%\begin{frame}{Biological Time Series}
-%    
-%\begin{itemize}
-%\item Snapshot of biological functions over time
-%\item Study complex and dynamic biological systems 
-%\item Tracking levels of genes/proteins reveals interactions
-%\item Biological time series are shorter compared to time series data in other domains (5-30 time points)
-%\item Similarity in temporal behavior may correspond to similarity in biological processes 
-% \end{itemize}
-%
-%\end{frame}
-%
-%
-%
-%
-%\begin{frame}{Types of Clustering Algorithms}
-%    \begin{figure}
-%    \centering
-%        \begin{subfigure}{.5\textwidth}
-%          \centering
-%          \includegraphics[width=1\linewidth]{hclust.png}
-%          \caption{Hierarchical-based clustering}
-%          \label{fig:sub1}
-%        \end{subfigure}%
-%        \begin{subfigure}{.5\textwidth}
-%          \centering
-%          \includegraphics[width=1\linewidth]{partition.png}
-%          \caption{Partition-based clustering. Image adopted from R package vignette factoextra.}
-%          \label{fig:sub2}
-%        \end{subfigure}
-%    \caption{Two different clustering strategies}
-%    \label{fig:test}
-%    \end{figure}
-%\end{frame}
+% 3rd slide
+\begin{frame}{Biological Time Series}
+    
+\begin{itemize}
+\item Snapshot of biological functions over time
+\item Study complex and dynamic biological systems 
+\item Tracking levels of genes/proteins reveals interactions
+\item Biological time series are shorter compared to time series data in other domains (5-30 time points)
+\item Similarity in temporal behavior may correspond to similarity in biological processes 
+ \end{itemize}
+
+\end{frame}
+
+
+
+
+\begin{frame}{Types of Clustering Algorithms}
+    \begin{figure}
+    \centering
+        \begin{subfigure}{.5\textwidth}
+          \centering
+          \includegraphics[width=1\linewidth]{hclust.png}
+          \caption{Hierarchical-based clustering}
+          \label{fig:sub1}
+        \end{subfigure}
+       \begin{subfigure}{.5\textwidth}
+          \centering
+          \includegraphics[width=1\linewidth]{partition.png}
+          \caption{Partition-based clustering. Image adopted from R package vignette factoextra.}
+          \label{fig:sub2}
+        \end{subfigure}
+    \caption{Two different clustering strategies}
+    \label{fig:test}
+    \end{figure}
+\end{frame}
 
 
 
@@ -157,39 +157,39 @@ corr_{LPWC}(i, j, X_i, X_j) = \underbrace{exp(\frac{- E(w)}{C})}_{\text{penalty}
 $$w = (L^{X_i}T_i - L^{X_j}T_j)^2$$
 \end{frame}
 
-%\begin{frame}{Algorithm}
-%\textbf{Computing optimal lag}
-%
-%$$score_{j} = \underset{X_i \in \{-m,..., m\}}{\mathrm{max}} \;\, corr_{LPWC}(i, j, X_i, 0) \quad \forall j \neq i$$
-%
-%$$lag_{j} = \underset{X_i \in \{-m,..., m\}}{\mathrm{arg \,max}} \;\, corr_{LPWC}(i, j, X_i, 0) \quad \forall j \neq i$$
-%Then, a best lag $\hat{X}_i$ for gene $i$ assigned by 
-%\[
-%\hat{X}_i = \underset{k \in \{-m, ..., m\}}{\mathrm{arg \,max}} \sum_{j \neq i} I(lag_j = k) * score_j
-%\]
-%
-%This is repeated to select a best lag for all genes.
-%
-%\textbf{Computing final correlation matrix}
-%\begin{multline*}
-% corr_{LPWC}(i, j, \hat{X}_i, \hat{X}_j) = 
-%exp(\frac{- E(w)}{C}) * corr_w(L^{\hat{X}_i}Y_i, L^{\hat{X}_j}Y_j, exp(\frac{- w}{C}))
-%\end{multline*}
-%\end{frame}
-%
-%\begin{frame}{Existing Time Series Clustering Methods}
-%Partition-based
-%\begin{itemize}
-%\item Short Time-series Expression Miner (STEM)
-%\item Graphical Query Language (GQL)
-%\item Cluster Analysis of Gene Expression Dynamics (CAGED)
-%\end{itemize}
-%Hierarchical-based
-%\begin{itemize}
-%\item Dynamic Time Warping (DTW)
-%\item Short Time Series Distance (STS)
-%\end{itemize}
-%\end{frame}
+\begin{frame}{Algorithm}
+\textbf{Computing optimal lag}
+
+$$score_{j} = \underset{X_i \in \{-m,..., m\}}{\mathrm{max}} \;\, corr_{LPWC}(i, j, X_i, 0) \quad \forall j \neq i$$
+
+$$lag_{j} = \underset{X_i \in \{-m,..., m\}}{\mathrm{arg \,max}} \;\, corr_{LPWC}(i, j, X_i, 0) \quad \forall j \neq i$$
+Then, a best lag $\hat{X}_i$ for gene $i$ assigned by 
+\[
+\hat{X}_i = \underset{k \in \{-m, ..., m\}}{\mathrm{arg \,max}} \sum_{j \neq i} I(lag_j = k) * score_j
+\]
+
+This is repeated to select a best lag for all genes.
+
+\textbf{Computing final correlation matrix}
+\begin{multline*}
+ corr_{LPWC}(i, j, \hat{X}_i, \hat{X}_j) = 
+exp(\frac{- E(w)}{C}) * corr_w(L^{\hat{X}_i}Y_i, L^{\hat{X}_j}Y_j, exp(\frac{- w}{C}))
+\end{multline*}
+\end{frame}
+
+\begin{frame}{Existing Time Series Clustering Methods}
+Partition-based
+\begin{itemize}
+\item Short Time-series Expression Miner (STEM)
+\item Graphical Query Language (GQL)
+\item Cluster Analysis of Gene Expression Dynamics (CAGED)
+\end{itemize}
+Hierarchical-based
+\begin{itemize}
+\item Dynamic Time Warping (DTW)
+\item Short Time Series Distance (STS)
+\end{itemize}
+\end{frame}
 
 
 \begin{frame}{Clustering Accuracy}
