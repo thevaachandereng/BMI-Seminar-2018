@@ -27,15 +27,15 @@
 \maketitle
 
 % 2nd slide
-\begin{frame}{Biological Time Series}
-
-\begin{figure}
-  \centering
-    \includegraphics[width=1.0\textwidth]{Timeseries.png}
-  \caption{Simple time series plot with 8 time points and 3 replicates}
-\end{figure} 
-   
-\end{frame}
+%\begin{frame}{Biological Time Series}
+%
+%\begin{figure}
+%  \centering
+%    \includegraphics[width=1.0\textwidth]{Timeseries.png}
+%  \caption{Simple time series plot with 8 time points and 3 replicates}
+%\end{figure} 
+%   
+%\end{frame}
 
 
 % 3rd slide
@@ -57,13 +57,13 @@
 \begin{frame}{Types of Clustering Algorithms}
     \begin{figure}
     \centering
-        \begin{subfigure}{.5\textwidth}
+        \begin{subfigure}{.45\textwidth}
           \centering
           \includegraphics[width=1\linewidth]{hclust.png}
           \caption{Hierarchical-based clustering}
           \label{fig:sub1}
         \end{subfigure}
-       \begin{subfigure}{.5\textwidth}
+       \begin{subfigure}{.45\textwidth}
           \centering
           \includegraphics[width=1\linewidth]{partition.png}
           \caption{Partition-based clustering. Image adopted from R package vignette factoextra.}
@@ -130,15 +130,80 @@ Delayed response (lags)
 \end{frame}
 
 
+\begin{frame}{General Formula}
+The general formula of LPWC 
 
-\begin{frame}{What is a Lag?}
+$$corr_{LPWC} = \text{penalty} * \text{weighted correlation}$$
+
+\end{frame}
+
+
+
+\begin{frame}{What is a Lag? No Lag Case}
 \begin{figure}
-     \includegraphics[width=0.60\linewidth]{Lags.png}
-      \caption{An example of the effects of applying different lags to genes 1 and 2.  Genes 1 and 2 are not lagged (top). Gene 1 with lag -1, gene 2 with no lags (middle). Gene 1 with lag -1 and gene 2 with lag 1 (bottom).}
-       \label{fig:lags}
+    \centering
+        \begin{subfigure}{.75\textwidth}
+          \centering
+          \includegraphics[width=1.2\linewidth]{lag1.png}
+          \caption{Intensity alignement for no lags case.}
+          \label{fig:lag11}
+        \end{subfigure}
+       \begin{subfigure}{.75\textwidth}
+          \centering
+          \includegraphics[width=.8\linewidth]{table1.png}
+          \caption{Temporal alignment with the matching intensity in Figure \ref{fig:lag11}}
+          \label{fig:lag12}
+        \end{subfigure}
+    \caption{Gene 1 and gene 2 are not lagged.}
+    \label{fig:test}
     \end{figure}
 
 \end{frame}
+
+
+\begin{frame}{What is a Lag? One Lag Case}
+\begin{figure}
+    \centering
+        \begin{subfigure}{.75\textwidth}
+          \centering
+          \includegraphics[width=1.2\linewidth]{lag2.png}
+          \caption{Intensity alignement for gene 1 with lag -1 and gene 2 with no lags.}
+          \label{fig:lag21}
+        \end{subfigure}
+       \begin{subfigure}{.75\textwidth}
+          \centering
+          \includegraphics[width=.8\linewidth]{table2.png}
+          \caption{Temporal alignment with the matching intensity in Figure \ref{fig:lag21}}
+          \label{fig:lag22}
+        \end{subfigure}
+    \caption{Gene 1 with lag -1 and gene 2 with no lags.}
+    \label{fig:test}
+    \end{figure}
+
+\end{frame}
+
+
+\begin{frame}{What is a Lag? One Lag Case}
+\begin{figure}
+    \centering
+        \begin{subfigure}{.75\textwidth}
+          \centering
+          \includegraphics[width=1.2\linewidth]{lag3.png}
+          \caption{Intensity alignement for gene 1 with lag -1 and gene 2 with lag 1. }
+          \label{fig:lag31}
+        \end{subfigure}
+       \begin{subfigure}{.75\textwidth}
+          \centering
+          \includegraphics[width=.8\linewidth]{table3.png}
+          \caption{Temporal alignment with the matching intensity in Figure \ref{fig:lag21}}
+          \label{fig:lag32}
+        \end{subfigure}
+    \caption{Gene 1 with lag -1 and gene 2 with lag 1.}
+    \label{fig:test}
+    \end{figure}
+
+\end{frame}
+
 
 
 \begin{frame}{Method Overview}
@@ -156,40 +221,40 @@ corr_{LPWC}(i, j, X_i, X_j) = \underbrace{exp(\frac{- E(w)}{C})}_{\text{penalty}
 \end{multline*}
 $$w = (L^{X_i}T_i - L^{X_j}T_j)^2$$
 \end{frame}
-
-\begin{frame}{Algorithm}
-\textbf{Computing optimal lag}
-
-$$score_{j} = \underset{X_i \in \{-m,..., m\}}{\mathrm{max}} \;\, corr_{LPWC}(i, j, X_i, 0) \quad \forall j \neq i$$
-
-$$lag_{j} = \underset{X_i \in \{-m,..., m\}}{\mathrm{arg \,max}} \;\, corr_{LPWC}(i, j, X_i, 0) \quad \forall j \neq i$$
-Then, a best lag $\hat{X}_i$ for gene $i$ assigned by 
-\[
-\hat{X}_i = \underset{k \in \{-m, ..., m\}}{\mathrm{arg \,max}} \sum_{j \neq i} I(lag_j = k) * score_j
-\]
-
-This is repeated to select a best lag for all genes.
-
-\textbf{Computing final correlation matrix}
-\begin{multline*}
- corr_{LPWC}(i, j, \hat{X}_i, \hat{X}_j) = 
-exp(\frac{- E(w)}{C}) * corr_w(L^{\hat{X}_i}Y_i, L^{\hat{X}_j}Y_j, exp(\frac{- w}{C}))
-\end{multline*}
-\end{frame}
-
-\begin{frame}{Existing Time Series Clustering Methods}
-Partition-based
-\begin{itemize}
-\item Short Time-series Expression Miner (STEM)
-\item Graphical Query Language (GQL)
-\item Cluster Analysis of Gene Expression Dynamics (CAGED)
-\end{itemize}
-Hierarchical-based
-\begin{itemize}
-\item Dynamic Time Warping (DTW)
-\item Short Time Series Distance (STS)
-\end{itemize}
-\end{frame}
+%
+%\begin{frame}{Algorithm}
+%\textbf{Computing optimal lag}
+%
+%$$score_{j} = \underset{X_i \in \{-m,..., m\}}{\mathrm{max}} \;\, corr_{LPWC}(i, j, X_i, 0) \quad \forall j \neq i$$
+%
+%$$lag_{j} = \underset{X_i \in \{-m,..., m\}}{\mathrm{arg \,max}} \;\, corr_{LPWC}(i, j, X_i, 0) \quad \forall j \neq i$$
+%Then, a best lag $\hat{X}_i$ for gene $i$ assigned by 
+%\[
+%\hat{X}_i = \underset{k \in \{-m, ..., m\}}{\mathrm{arg \,max}} \sum_{j \neq i} I(lag_j = k) * score_j
+%\]
+%
+%This is repeated to select a best lag for all genes.
+%
+%\textbf{Computing final correlation matrix}
+%\begin{multline*}
+% corr_{LPWC}(i, j, \hat{X}_i, \hat{X}_j) = 
+%exp(\frac{- E(w)}{C}) * corr_w(L^{\hat{X}_i}Y_i, L^{\hat{X}_j}Y_j, exp(\frac{- w}{C}))
+%\end{multline*}
+%\end{frame}
+%%
+%\begin{frame}{Existing Time Series Clustering Methods}
+%Partition-based
+%\begin{itemize}
+%\item Short Time-series Expression Miner (STEM)
+%\item Graphical Query Language (GQL)
+%\item Cluster Analysis of Gene Expression Dynamics (CAGED)
+%\end{itemize}
+%Hierarchical-based
+%\begin{itemize}
+%\item Dynamic Time Warping (DTW)
+%\item Short Time Series Distance (STS)
+%\end{itemize}
+%\end{frame}
 
 
 \begin{frame}{Clustering Accuracy}
